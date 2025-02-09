@@ -2,7 +2,6 @@ const apiKey = "6e496b0c0a1d24da18427ab07fb3e8bd";
 
 var pesquisa_btn = document.querySelector("#pesquisa_btn");
 var cidade_input = document.querySelector("#cidade_input");
-var nuvens_map = document.querySelector("#nuvens_map");
 
 
 
@@ -19,24 +18,45 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Adiciona mapa base do OpenStreetMap
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+        
     
     // Adiciona camada base
-    let weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/temp_new//{z}/{x}/{y}.png?appid=${apiKey}`);;
+    let weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new//{z}/{x}/{y}.png?appid=${apiKey}`);
     
-    nuvens_map.addEventListener("click", (e) =>{
-        e.preventDefault();
-    
-        const mod_map = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new//{z}/{x}/{y}.png?appid=${apiKey}`);      
-    
-            weatherLayer = mod_map;
-    
-            return weatherLayer;
-    });
-    
-
     weatherLayer.addTo(map);
     
+    window.changeLayer = function(layerType){
+      if(weatherLayer){
+        map.removeLayer(weatherLayer);
+      }
 
+      switch (layerType){
+        case "clouds_new":
+          weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new//{z}/{x}/{y}.png?appid=${apiKey}`);
+          break;
+        
+        case "temp_new":
+          weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/temp_new//{z}/{x}/{y}.png?appid=${apiKey}`);
+          break;
+        
+        case "wind_new":
+          weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/wind_new//{z}/{x}/{y}.png?appid=${apiKey}`);
+          break;
+        
+        case "pressure_new":
+          weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/pressure_new//{z}/{x}/{y}.png?appid=${apiKey}`);
+          break;
+        
+        case "precipitation_new":
+          weatherLayer = L.tileLayer(`https://tile.openweathermap.org/map/precipitation_new//{z}/{x}/{y}.png?appid=${apiKey}`);
+          break;
+        default:
+            console.log("Camada inválida!");
+            return;
+        }
+
+        weatherLayer.addTo(map);
+    };
             
     //Botão de procura
     window.searchLocation = function () {
