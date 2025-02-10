@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    font-family: "Roboto Condensed", serif;
+}
+.container{
+    background-color: black;
+    height: 95%;
+    width: 95%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px gray;
+    border: solid 1px gray;
+}
+/*Barra de pesquisa*/
+.barra_pesquisa{
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 25%;
+    top: 8%;
+    transform: translate(-50%, -50%);
+}
+
+.barra_pesquisa input{
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px 0px gray;
+    color: black;
+}
+.barra_pesquisa button{
+    height: 35px;
+    width: 35px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px;
+    border: none;    
+}
+.barra_pesquisa i{
+    color: black;
+}
+
+/*Informações em tempo real lado esquerdo*/
+.info_tempReal{
+    background-color: black;
+    height: 80%;
+    width: 40%;
+    position: absolute;
+    left: 25%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px gray;
+    box-shadow: 0px 0px 15px 0px gray;
+
+}
+
+
+
+.map{
+    position: absolute;
+    left: 75%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+}

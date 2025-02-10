@@ -3,14 +3,6 @@ const apiKey = "6e496b0c0a1d24da18427ab07fb3e8bd";
 var pesquisa_btn = document.querySelector("#pesquisa_btn");
 var cidade_input = document.querySelector("#cidade_input");
 
-
-
-
-
-
-
-
-
 //Criação do MAPA
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -25,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     weatherLayer.addTo(map);
     
+    // Muda a camada do mapa ao precionar os botões
     window.changeLayer = function(layerType){
       if(weatherLayer){
         map.removeLayer(weatherLayer);

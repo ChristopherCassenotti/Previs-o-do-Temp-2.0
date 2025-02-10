@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 </head>
@@ -25,13 +28,15 @@
         </div>
 
         <div class="info_tempReal">
-            <i id="icon-local" class="fa-solid fa-location-dot"><span id="nome_cidade">Porto</span></i>
+            <i id="icon-local" class="fa-solid fa-location-dot"></i><span id="nome_cidade">Porto</span>
             <img src="https://flagcdn.com/w80/br.png" alt="" width="50px" height="35px" id="bandeira_pais">
+
+            <span id="temperatura">38&deg;</span>
 
             <span id="clima">Nublado</span>
             <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
 
-            <span id="humidade">38&deg;</span>
+            <span id="humidade">50%</span>
             <span id="vento">5.3 km/h</span>
         </div>
 
@@ -39,25 +44,64 @@
 
             <div class="amanha">
                 <p>Previsão Amanhã em 6h em 6h</p>
-                    <div class="00AM"></div>
-                    <div class="06AM"></div>
-                    <div class="12PM"></div>
-                    <div class="18PM"></div>
+                    <div class="00AM">
+                        <span id="hora">00:00 AM</span>
+                        <span id="temperatura">38&deg;</span>
+                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                    </div>
+                    
+                    <div class="06AM">
+                        <span id="hora">06:00 AM</span>
+                        <span id="temperatura">38&deg;</span>
+                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                    </div>
+                    
+                    <div class="12PM">
+                        <span id="hora">12:00 PM</span>
+                        <span id="temperatura">38&deg;</span>
+                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                    </div>
+                    
+                    <div class="18PM">
+                        <span id="hora">18:00 PM</span>
+                        <span id="temperatura">38&deg;</span>
+                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                    </div>
             </div>
 
             <div class="semana">
 
                 <p>Previsão em 5 dias</p>
-                    <div class="dia1"></div>
-                    <div class="dia2"></div>
-                    <div class="dia3"></div>
-                    <div class="dia4"></div>
-                    <div class="dia5"></div>
+                    
+                    <div class="dia1">
+                        <span id="dia">20/08</span>
+                        <span id="temperatura">38&deg;</span>
+                    </div>
+                    
+                    <div class="dia2">
+                        <span id="dia">20/08</span>
+                        <span id="temperatura">38&deg;</span>
+                    </div>
+                    
+                    <div class="dia3">
+                        <span id="dia">20/08</span>
+                        <span id="temperatura">38&deg;</span>
+                    </div>
+                    
+                    <div class="dia4">
+                        <span id="dia">20/08</span>
+                        <span id="temperatura">38&deg;</span>
+                    </div>
+                    
+                    <div class="dia5">
+                        <span id="dia">20/08</span>
+                        <span id="temperatura">38&deg;</span>
+                    </div>
             </div>
         </div>
 
         <div class="componentes_map">
-            <div id="map" style="height: 300px; width: 500px;"></div>
+            <div class="map" id="map" style="height: 300px; width: 500px;"></div>
 
             <div class="btn_modos">
                 <button id="nuvens_map" onclick="changeLayer('clouds_new')">Nuvens</button>
