@@ -66,13 +66,27 @@ document.addEventListener("DOMContentLoaded", function () {
           // Move o mapa para o local encontrado
           let lat = data[0].lat;
           let lon = data[0].lon;
-          map.setView([lat, lon], 10);
+          map.setView([lat, lon], 5);
           L.marker([lat, lon]).addTo(map).bindPopup(location).openPopup();
         })
         .catch((error) => console.error(error));
 
     };
-
-
   });
+  
+  //Botão style
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".btn_modos button");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", function () {
+            // Remove focus de todos os botões
+            buttons.forEach((btn) => btn.classList.remove("active"));
+
+            // Mantém o foco no botão clicado
+            this.classList.add("active");
+        });
+    });
+});
+
   

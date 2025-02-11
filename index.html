@@ -14,13 +14,7 @@
 
 </head>
 <body>
-    <div class="btn_tema">
-        <button id="troca_tema"><i class="fa-solid fa-moon"></i></button>
-    </div>
-    
     <div class="container">
-            
-            <h2>Procure por sua cidade</h2>
 
         <div class="barra_pesquisa">
             <input type="text" id="cidade_input" placeholder="Digite a cidade" required>
@@ -36,7 +30,7 @@
             <span id="temperatura">38&deg;</span>
 
             <span id="clima">Nublado</span>
-            <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+            <img src="http://openweathermap.org/img/wn/01d@2x.png" width="70px" height="70px" alt="clima" id="icone-clima">
 
             <div class="humi_wind">
                 <i class="fa-solid fa-droplet"></i>
@@ -51,39 +45,44 @@
 
         <div class="previsao">
 
+            <p>Previsão Amanhã em 6h em 6h</p>
             <div class="amanha">
-                <p>Previsão Amanhã em 6h em 6h</p>
                     <div class="00AM">
-                        <span id="hora">00:00 AM</span>
+                        <span id="hora">00:00 AM</span><br>
+                        <span class="bar"></span>
                         <span id="temperatura">38&deg;</span>
-                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png" width="40px" height="40px" alt="clima" id="icone-clima">
                     </div>
                     
                     <div class="06AM">
-                        <span id="hora">06:00 AM</span>
+                        <span id="hora">06:00 AM</span><br>
+                        <span class="bar"></span>
                         <span id="temperatura">38&deg;</span>
-                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png" width="40px" height="40px" alt="clima" id="icone-clima">
                     </div>
                     
                     <div class="12PM">
-                        <span id="hora">12:00 PM</span>
+                        <span id="hora">12:00 PM</span><br>
+                        <span class="bar"></span>
                         <span id="temperatura">38&deg;</span>
-                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png" width="40px" height="40px" alt="clima" id="icone-clima">
                     </div>
                     
                     <div class="18PM">
-                        <span id="hora">18:00 PM</span>
+                        <span id="hora">18:00 PM</span><br>
+                        <span class="bar"></span>
                         <span id="temperatura">38&deg;</span>
-                        <img src="" width="70px" height="70px" alt="clima" id="icone-clima">
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png" width="40px" height="40px" alt="clima" id="icone-clima">
                     </div>
             </div>
 
+            <p>Previsão em 5 dias</p>
+            
             <div class="semana">
-
-                <p>Previsão em 5 dias</p>
                     
                     <div class="dia1">
                         <span id="dia">20/08</span>
+                        <span class="bar"></span>
                         <span id="temperatura">38&deg;</span>
                     </div>
                     
@@ -110,12 +109,12 @@
         </div>
 
         <div class="componentes_map">
-            <div class="map" id="map" style="height: 300px; width: 500px;"></div>
+            <div class="map" id="map" style="height: 250px; width: 500px;"></div>
 
             <div class="btn_modos">
                 <button id="nuvens_map" onclick="changeLayer('clouds_new')">Nuvens</button>
                 <button id="precipitacao_map" onclick="changeLayer('precipitation_new')">Precipitação</button>
-                <button id="nivel_oceano_map" onclick="changeLayer('pressure_new')">Pressão ao Nível <br> do Oceano</button>
+                <button id="nivel_oceano_map" onclick="changeLayer('pressure_new')">Pressão do Oceano</button>
                 <button id="velocidade_vento_map" onclick="changeLayer('wind_new')">Velocidade do Vento</button>
                 <button id="temperatura_map" onclick="changeLayer('temp_new')">Temperatura</button>
             </div> 
