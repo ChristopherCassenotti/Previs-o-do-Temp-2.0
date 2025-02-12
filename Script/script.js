@@ -3,6 +3,18 @@ const apiKey = "6e496b0c0a1d24da18427ab07fb3e8bd";
 var pesquisa_btn = document.querySelector("#pesquisa_btn");
 var cidade_input = document.querySelector("#cidade_input");
 
+const nome_cidade = document.getElementById("nome_cidade");
+const bandeira_pais = document.getElementById("bandeira_pais");
+const clima_atual = document.getElementById("clima");
+const temperatura = document.getElementById("temperatura");
+const temp_min = document.getElementById("min_temp");
+const temp_max = document.getElementById("max_temp");
+const feels_like = document.getElementById("feels_like");
+const icone_climaAtual = document.querySelector('#icone-clima');
+const humidade = document.getElementById("humidade");
+const vento = document.getElementById("vento");
+
+
 //Criação do MAPA
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -80,13 +92,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     buttons.forEach((button) => {
         button.addEventListener("click", function () {
-            // Remove focus de todos os botões
             buttons.forEach((btn) => btn.classList.remove("active"));
 
-            // Mantém o foco no botão clicado
             this.classList.add("active");
         });
     });
 });
 
+//Temperatura
+
+
+
+//Function
+
+const consultaApi = async (city) =>{
+  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`;
+
+  const response = await fetch(apiURL);
+  const data = await (response).json();
+  
+  return data;
+};
+
+const dataApi = async (city)=>{
+  const data = await consultaApi(city);
+
+    nome_cidade.innerHTML =  data.name;
+    bandeira_pais.setAttribute("src",  `https://flagcdn.com/w80/${data.sys.country.toLowerCase()}.png`);
+    clima_atual.innerHTML = data.weather[0].description;
+    temperatura.innerHTML = parseInt(data.main.temp)+"&deg;";
+    temp_max.innerHTML ="máx " + parseInt(data.main.temp_max)+"&deg;";
+    temp_min.innerHTML ="min " + parseInt(data.main.temp_min)+"&deg;";
+    feels_like.innerHTML = "Sensação Térmica de " + parseInt(data.main.feels_like) +"&deg;";
+    icone_climaAtual.setAttribute("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`) 
+    humidade.innerHTML = data.main.humidity + " %";
+    vento.innerHTML = data.wind.speed + " KM/H";
+};
+
+
+//event
+pesquisa_btn.addEventListener("click", function(){
+  
+  var city = cidade_input.value;
+  dataApi(city); 
+});
   
