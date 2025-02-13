@@ -3,6 +3,7 @@ const apiKey = "6e496b0c0a1d24da18427ab07fb3e8bd";
 var pesquisa_btn = document.querySelector("#pesquisa_btn");
 var cidade_input = document.querySelector("#cidade_input");
 
+//Variaveis da previsão em tempo real
 const nome_cidade = document.getElementById("nome_cidade");
 const bandeira_pais = document.getElementById("bandeira_pais");
 const clima_atual = document.getElementById("clima");
@@ -88,20 +89,21 @@ document.addEventListener("DOMContentLoaded", function () {
   
   //Botão style
   document.addEventListener("DOMContentLoaded", function () {
+    //seleciona todos os buttons e deixa em formato de array
     const buttons = document.querySelectorAll(".btn_modos button");
+
 
     buttons.forEach((button) => {
         button.addEventListener("click", function () {
             buttons.forEach((btn) => btn.classList.remove("active"));
 
+            //this serve para add a class para o btn que executou a função
             this.classList.add("active");
         });
     });
 });
 
 //Temperatura
-
-
 
 //Function
 
@@ -133,7 +135,48 @@ const dataApi = async (city)=>{
 //event
 pesquisa_btn.addEventListener("click", function(){
   
-  var city = cidade_input.value;
+  let city = cidade_input.value;
   dataApi(city); 
 });
+
+//Variaveis da Previsão da semana
+
+const prev00 = document.getElementById('temp00');
+const prev06 = document.getElementById('temp06');
+const prev12 = document.getElementById('temp12');
+const prev18 = document.getElementById('temp18');
+
+
+//function
+
+pesquisa_btn.addEventListener("click", function(){
+
+  var city = cidade_input.value;
+  addInfoApiCall5();
+})
   
+
+const dataApiCall5 = async ()=>{
+  let location = cidade_input.value;
+    
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric&lang=pt_br`;
+  const response = await fetch(url);
+    if(!response.ok){
+      alert("previsão não encontrada!");
+      return
+    };
+    
+    const data = await response.json();
+
+    return data;
+}
+
+const addInfoApiCall5 = async ()=>{
+  const data = await dataApiCall5();
+
+    prev00.innerHTML = parseInt(data.list[3].main.temp) + "&deg;";
+    prev06.innerHTML = parseInt(data.list[5].main.temp) + "&deg;";
+    prev12.innerHTML = parseInt(data.list[7].main.temp) + "&deg;";
+    prev18.innerHTML = parseInt(data.list[9].main.temp) + "&deg;";
+
+  }
