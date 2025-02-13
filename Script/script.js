@@ -146,9 +146,25 @@ const prev06 = document.getElementById('temp06');
 const prev12 = document.getElementById('temp12');
 const prev18 = document.getElementById('temp18');
 
+const icon00 = document.getElementById("1icone-clima");
+const icon06 = document.getElementById('2icone-clima');
+const icon12 = document.getElementById('3icone-clima');
+const icon18 = document.getElementById('4icone-clima');
+
+const dia1 = document.querySelectorAll('.dia1 span');
+const dia2 = document.querySelectorAll('.dia2 span');
+const dia3 = document.querySelectorAll('.dia3 span');
+const dia4 = document.querySelectorAll('.dia4 span');
+const dia5 = document.querySelectorAll('.dia5 span');
+
+const temp1 = document.querySelectorAll('.dia1 span#temperatura');
+const temp2 = document.querySelectorAll('.dia2 span#temperatura');
+const temp3 = document.querySelectorAll('.dia3 span#temperatura');
+const temp4 = document.querySelectorAll('.dia4 span#temperatura');
+const temp5 = document.querySelectorAll('.dia5 span#temperatura');
 
 //function
-
+document.addEventListener("DOMContentLoaded", function(){
 pesquisa_btn.addEventListener("click", function(){
 
   var city = cidade_input.value;
@@ -174,9 +190,44 @@ const dataApiCall5 = async ()=>{
 const addInfoApiCall5 = async ()=>{
   const data = await dataApiCall5();
 
+//Transforma a data e hora em apenas dia e mês no sistema BR
+let proximasDatas = [];
+
+  const indices = [3, 10, 18, 26, 34];
+
+  indices.forEach(index => {
+    const dataHoraCompleta = data.list[index].dt_txt;
+    const partesData = dataHoraCompleta.split(" ")[0].split("-");
+    const dataFormatada = `${partesData[2]}/${partesData[1]}`;
+    
+    proximasDatas.push(dataFormatada);
+  });
+  const [dia01, dia02, dia03, dia04, dia05] = proximasDatas;
+
+    //previsao em horas
     prev00.innerHTML = parseInt(data.list[3].main.temp) + "&deg;";
     prev06.innerHTML = parseInt(data.list[5].main.temp) + "&deg;";
     prev12.innerHTML = parseInt(data.list[7].main.temp) + "&deg;";
     prev18.innerHTML = parseInt(data.list[9].main.temp) + "&deg;";
+    
+    //icone da previsao em horas
+    icon00.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png`);
+    icon06.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[5].weather[0].icon}@2x.png`);
+    icon12.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png`);
+    icon18.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png`);
 
+    //data da previsao
+    dia1[0].innerHTML = proximasDatas[0];
+    dia2[0].innerHTML = proximasDatas[1];
+    dia3[0].innerHTML = proximasDatas[2];
+    dia4[0].innerHTML = proximasDatas[3];
+    dia5[0].innerHTML = proximasDatas[4];
+
+    //temp da previsao data
+    temp1[0].innerHTML = parseInt(data.list[7].main.temp) + "&deg;";
+    temp2[0].innerHTML = parseInt(data.list[14].main.temp) + "&deg;";
+    temp3[0].innerHTML = parseInt(data.list[22].main.temp) + "&deg;";
+    temp4[0].innerHTML = parseInt(data.list[30].main.temp) + "&deg;";
+    temp5[0].innerHTML = parseInt(data.list[38].main.temp) + "&deg;";
   }
+});
