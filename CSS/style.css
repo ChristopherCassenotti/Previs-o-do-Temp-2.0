@@ -216,4 +216,5 @@ body{
 }
 .leaflet-popup-content{
     color: black;
+    text-transform: capitalize;
 }

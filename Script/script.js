@@ -15,6 +15,83 @@ const icone_climaAtual = document.querySelector('#icone-clima');
 const humidade = document.getElementById("humidade");
 const vento = document.getElementById("vento");
 
+// Default
+document.addEventListener("DOMContentLoaded", function () {
+  //cidade padrão
+  const cidadePadrao = "São Paulo"; 
+
+  const carregarClimaPadrao = async (city) => {
+    const data = await consultaApi(city);
+  
+    nome_cidade.innerHTML = data.name;
+    bandeira_pais.setAttribute("src", `https://flagcdn.com/w80/${data.sys.country.toLowerCase()}.png`);
+    clima_atual.innerHTML = data.weather[0].description;
+    temperatura.innerHTML = parseInt(data.main.temp) + "&deg;";
+    temp_max.innerHTML = "máx " + parseInt(data.main.temp_max) + "&deg;";
+    temp_min.innerHTML = "min " + parseInt(data.main.temp_min) + "&deg;";
+    feels_like.innerHTML = "Sensação Térmica de " + parseInt(data.main.feels_like) + "&deg;";
+    icone_climaAtual.setAttribute("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+    humidade.innerHTML = data.main.humidity + " %";
+    vento.innerHTML = data.wind.speed + " KM/H";
+  };
+
+  const carregarPrevisao = async (city) => {
+    const data = await dataApiCall5(city);
+
+    //previsão em 6 em 6 horas
+    prev00.innerHTML = parseInt(data.list[3].main.temp) + "&deg;";
+    prev06.innerHTML = parseInt(data.list[5].main.temp) + "&deg;";
+    prev12.innerHTML = parseInt(data.list[7].main.temp) + "&deg;";
+    prev18.innerHTML = parseInt(data.list[9].main.temp) + "&deg;";
+
+    //icon da previsão em 6 em 6 horas
+    icon00.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png`);
+    icon06.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[5].weather[0].icon}@2x.png`);
+    icon12.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[7].weather[0].icon}@2x.png`);
+    icon18.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png`);
+
+    //previsão para os próximos 5 dias
+    let proximasDatas = [];
+    const indices = [3, 10, 18, 26, 34];
+    indices.forEach(index => {
+      const dataHoraCompleta = data.list[index].dt_txt;
+      const partesData = dataHoraCompleta.split(" ")[0].split("-");
+      const dataFormatada = `${partesData[2]}/${partesData[1]}`;
+      proximasDatas.push(dataFormatada);
+    });
+
+    const [dia01, dia02, dia03, dia04, dia05] = proximasDatas;
+
+    //datas da previsão
+    dia1[0].innerHTML = proximasDatas[0];
+    dia2[0].innerHTML = proximasDatas[1];
+    dia3[0].innerHTML = proximasDatas[2];
+    dia4[0].innerHTML = proximasDatas[3];
+    dia5[0].innerHTML = proximasDatas[4];
+
+    temp1[0].innerHTML = parseInt(data.list[7].main.temp) + "&deg;";
+    temp2[0].innerHTML = parseInt(data.list[14].main.temp) + "&deg;";
+    temp3[0].innerHTML = parseInt(data.list[22].main.temp) + "&deg;";
+    temp4[0].innerHTML = parseInt(data.list[30].main.temp) + "&deg;";
+    temp5[0].innerHTML = parseInt(data.list[38].main.temp) + "&deg;";
+  };
+
+  const dataApiCall5 = async (city) => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&lang=pt_br`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      alert("Previsão não encontrada!");
+      return;
+    }
+    const data = await response.json();
+    return data;
+  };
+
+  // Carrega o clima, previsao e a cidade default
+  carregarClimaPadrao(cidadePadrao);
+  carregarPrevisao(cidadePadrao);
+});
+
 
 //Criação do MAPA
 
